@@ -1,4 +1,6 @@
 todo.db
 /uploads
 config.py
+api/__pycache__/
 /__pycache__/
+api/uploads/*
