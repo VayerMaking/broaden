@@ -58,7 +58,10 @@ class _HomeState extends State<Home> {
             ),
             Padding(
               padding: EdgeInsets.all(14),
-              child: Text(data[index]["title"]),
+              child: Container(
+                width: 130,
+                child: Text(data[index]["title"]),
+              ),
             ),
           ],
         ),
