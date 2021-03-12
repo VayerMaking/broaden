@@ -9,6 +9,8 @@ import random
 import string
 import os
 from dataclasses import dataclass
+import werkzeug
+
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
@@ -57,6 +59,16 @@ class News(db.Model):
     image = db.Column(db.String(64))
     timestamp = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
 
+@dataclass
+class Upload(db.Model):
+    id: int
+    title: str
+    timestamp: datetime
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(20))
+    timestamp = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
+
 @app.route('/', methods = ['GET'])
 def index():
     map = Map.query.all()
@@ -75,6 +87,14 @@ def news():
 @app.route('/img/<path:filename>')
 def send_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
+
+@app.route('/upload', methods = ['GET', 'POST'])
+def upload():
+    imagefile = request.files['image']
+    filename = werkzeug.utils.secure_filename(imagefile.filename)
+    print("\nReceived image File name : " + imagefile.filename)
+    imagefile.save(os.path.join("uploads", filename))
+    return "Image Uploaded Successfully"
 
 if __name__ == '__main__':
 	db.create_all()
