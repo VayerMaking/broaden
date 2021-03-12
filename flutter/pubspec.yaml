@@ -13,7 +13,11 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   google_maps_flutter: ^2.0.1
-  location: ^4.1.1
+  location: ^2.5.0
+  font_awesome_flutter: ^8.12.0
+  http: ^0.12.2
+  camera: ^0.5.8+5
+
 
 dev_dependencies:
   flutter_test:
