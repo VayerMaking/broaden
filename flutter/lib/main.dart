@@ -1,4 +1,8 @@
+import 'package:broaden/camera_tab.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:broaden/animals_tab.dart';
 import 'package:broaden/gmap.dart';
+import 'package:broaden/home.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
@@ -28,6 +32,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    Home(),
+    Camera(),
+    Animals(),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -43,18 +54,33 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white.withOpacity(0.95),
       appBar: AppBar(
         title: Text(widget.title),
         centerTitle: true,
         elevation: 0,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.account_circle_rounded,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              // do something
+            },
+          )
+        ],
       ),
-      body: Container(
-        padding: EdgeInsets.all(16),
-        child: _buildHomepage(),
-      ),
+      body: _children[_currentIndex],
       floatingActionButton: FloatingActionButton(
         tooltip: 'Increment',
         child: Icon(Icons.map),
@@ -63,27 +89,23 @@ class _MyHomePageState extends State<MyHomePage> {
           MaterialPageRoute(builder: (context) => GMap()),
         ),
       ),
-    );
-  }
-
-  Widget _buildArticle(index) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: 200,
-        color: Colors.grey,
-      ),
-    );
-  }
-
-  Widget _buildHomepage() {
-    return Container(
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return _buildArticle(index);
-        },
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: _currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.camera_alt_outlined),
+            title: Text('Camera'),
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.dog),
+            title: Text('Animals'),
+          )
+        ],
       ),
     );
   }
