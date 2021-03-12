@@ -19,7 +19,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 db = SQLAlchemy(app)
 
+@dataclass
 class User(db.Model):
+    id: int
+    user_id: str
+    username: str
+    points: int
+
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.String(40))
     username = db.Column(db.String(30))
@@ -41,6 +47,11 @@ class Map(db.Model):
 def index():
     map = Map.query.all()
     return jsonify(map)
+
+@app.route('/user/', methods = ['GET'])
+def user():
+    user = User.query.filter_by(user_id = request.args.get('user_id')).first()
+    return jsonify(user)
 
 if __name__ == '__main__':
 	db.create_all()
