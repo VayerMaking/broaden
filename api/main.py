@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request, flash, redirect, url_for, session, jsonify
+from flask import render_template, request, flash, redirect, url_for, session, jsonify, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 import time
 from datetime import datetime
@@ -43,6 +43,20 @@ class Map(db.Model):
     y = db.Column(db.Integer)
     count = db.Column(db.Integer)
 
+@dataclass
+class News(db.Model):
+    id: int
+    title: str
+    text: str
+    image: str
+    timestamp: datetime
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(20))
+    text = db.Column(db.String(400))
+    image = db.Column(db.String(64))
+    timestamp = db.Column(db.DateTime(timezone=True), default=datetime.utcnow)
+
 @app.route('/', methods = ['GET'])
 def index():
     map = Map.query.all()
@@ -52,6 +66,15 @@ def index():
 def user():
     user = User.query.filter_by(user_id = request.args.get('user_id')).first()
     return jsonify(user)
+
+@app.route('/news', methods = ['GET'])
+def news():
+    news = News.query.order_by(News.timestamp.asc()).limit(10).all()
+    return jsonify(news)
+
+@app.route('/img/<path:filename>')
+def send_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 if __name__ == '__main__':
 	db.create_all()

@@ -229,3 +229,12 @@ INSERT INTO Map (x,y,count) VALUES (20,7,5);
 INSERT INTO Map (x,y,count) VALUES (20,8,5);
 INSERT INTO Map (x,y,count) VALUES (20,9,5);
 INSERT INTO Map (x,y,count) VALUES (20,10,5);
+
+INSERT INTO User (user_id, username, points) VALUES ("123", "mvayer", 100000);
+
+INSERT INTO News (title, text, image, timestamp) VALUES ("pcheli ubitzi", "pcheli ubitzi napoadnaha sofiq i prevzeha stolicata", "HPTgRzBpodSencteoIMdqbROirIGaIRJxclZLEfWZzbuwPmBFOaVgZAJIMyLiaCr.png",'2021-01-28 13:40:42');
+INSERT INTO News (title, text, timestamp) VALUES ("bate boiko", "slabo rabota", '2021-01-28 13:40:42');
+INSERT INTO News (title, text, timestamp) VALUES ("maimuni", "te sa se izmuknali ot zooparka", '2021-01-28 13:40:42');
+INSERT INTO News (title, text, timestamp) VALUES ("asdf", "asdf", '2021-01-28 13:40:42');
+INSERT INTO News (title, text, timestamp) VALUES ("qwerty", "qwerty", '2021-01-28 13:40:42');
+INSERT INTO News (title, text, timestamp) VALUES ("jimbotron", "pusnaha go nai nakraq", '2021-01-28 13:40:42');
