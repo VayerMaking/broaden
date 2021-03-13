@@ -232,9 +232,8 @@ INSERT INTO Map (x,y,count) VALUES (20,10,5);
 
 INSERT INTO User (user_id, username, points) VALUES ("123", "mvayer", 100000);
 
-INSERT INTO News (title, text, image, timestamp) VALUES ("pcheli ubitzi", "pcheli ubitzi napoadnaha sofiq i prevzeha stolicata", "HPTgRzBpodSencteoIMdqbROirIGaIRJxclZLEfWZzbuwPmBFOaVgZAJIMyLiaCr.png",'2021-01-28 13:40:42');
-INSERT INTO News (title, text, timestamp) VALUES ("bate boiko", "slabo rabota", '2021-01-28 13:40:42');
-INSERT INTO News (title, text, timestamp) VALUES ("maimuni", "te sa se izmuknali ot zooparka", '2021-01-28 13:40:42');
-INSERT INTO News (title, text, timestamp) VALUES ("asdf", "asdf", '2021-01-28 13:40:42');
-INSERT INTO News (title, text, timestamp) VALUES ("qwerty", "qwerty", '2021-01-28 13:40:42');
-INSERT INTO News (title, text, timestamp) VALUES ("jimbotron", "pusnaha go nai nakraq", '2021-01-28 13:40:42');
+INSERT INTO News (title, text, image, timestamp) VALUES ("Does nature afect our vision", "pcheli ubitzi napoadnaha sofiq i prevzeha stolicata", "HPTgRzBpodSencteoIMdqbROirIGaIRJxclZLEfWZzbuwPmBFOaVgZAJIMyLiaCr.png",'2021-01-28 13:40:42');
+INSERT INTO News (title, text, image, timestamp) VALUES ("Does 5g hurt pigeons", "slabo rabota", "kMRRwHFNiDaZobJEhaPvLbVqkSnonuITJQNdWyowUcxAqgIpkqYAAlAUPMHDYzvv.jpeg", '2021-01-28 13:40:42');
+INSERT INTO News (title, text, image, timestamp) VALUES ("Butterflies and their lifestyle", "te sa se izmuknali ot zooparka", "MEzkdDjbJRposUjQjmnsrmoXlkvJKZyILbzxCTkMwCpeZfazFgxzBODWJPJArCvN.jpeg", '2021-01-28 13:40:42');
+INSERT INTO News (title, text, image, timestamp) VALUES ("What animal is baby yoda", "asdf", "tJrSscgRXuGplLWJcDuuQZxGmmRTFnlJylYSqPuLUvHdrXFKdpwLhJhAEeXHWWVv.jpeg", '2021-01-28 13:40:42');
+INSERT INTO News (title, text, image, timestamp) VALUES ("Is Linux an animal", "qwerty", "ylgkeqcPBmFuBLJmhXQvOWMFyolPZvSUcfJRCBTjvZpwUTIiCqZpYXaGktYbCxre.png", '2021-01-28 13:40:42');
