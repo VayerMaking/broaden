@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final String url = "http://192.168.88.246:5000/news";
+  final String url = "http://192.168.88.244:5000/news";
   List data;
 
   @override
@@ -36,31 +36,36 @@ class _HomeState extends State<Home> {
   }
 
   Widget _buildArticle(index) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-        height: 100,
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Image(
-                  width: 150,
-                  height: 100,
-                  fit: BoxFit.cover,
-                  image: NetworkImage("http://192.168.88.246:5000/img/" +
-                      data[index]["image"])),
-            ),
-            Padding(
-              padding: EdgeInsets.all(14),
-              child: Text(data[index]["title"]),
-            ),
-          ],
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          height: 100,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: Image(
+                    width: 150,
+                    height: 100,
+                    fit: BoxFit.cover,
+                    image: NetworkImage("http://192.168.88.244:5000/img/" +
+                        data[index]["image"])),
+              ),
+              Padding(
+                padding: EdgeInsets.all(14),
+                child: Container(
+                  width: 130,
+                  child: Text(data[index]["title"]),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

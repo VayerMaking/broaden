@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "331952070424",
+    "project_id": "broaden-307408",
+    "storage_bucket": "broaden-307408.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331952070424:android:32c765da0adbd8b472c86d",
+        "android_client_info": {
+          "package_name": "com.example.broaden"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331952070424-c6eil7nebuemucs4ssdsq4n3ajrj0i8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-oCs5cJPtE6xM6IvvFNUeArhTWi8xsCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "331952070424-c6eil7nebuemucs4ssdsq4n3ajrj0i8q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

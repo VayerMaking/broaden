@@ -1,23 +1,46 @@
 import 'package:broaden/camera_tab.dart';
+import 'package:broaden/profile_tab.dart';
+import 'package:broaden/sign_in_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:broaden/animals_tab.dart';
 import 'package:broaden/gmap.dart';
 import 'package:broaden/home.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'services/authentication_service.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Broaden',
-      theme: ThemeData(
-        primaryColor: Colors.lightBlue[800],
-        accentColor: Colors.cyan[600],
+    return MultiProvider(
+      providers: [
+        Provider<AuthenticationService>(
+          create: (_) => AuthenticationService(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) =>
+              context.read<AuthenticationService>().authStateChanges,
+        )
+      ],
+      child: MaterialApp(
+        title: 'Broaden',
+        theme: ThemeData(
+          primaryColor: Colors.lightBlue[800],
+          accentColor: Colors.cyan[600],
+        ),
+        home: AuthenticationWrapper(),
       ),
-      home: MyHomePage(title: 'Broaden'),
     );
   }
 }
@@ -35,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     Home(),
-    Camera(),
+    CameraScreen(),
     Animals(),
   ];
 
@@ -75,7 +98,11 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.white,
             ),
             onPressed: () {
-              // do something
+              Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (context) => Profile(),
+                ),
+              );
             },
           )
         ],
@@ -108,5 +135,16 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+    if (firebaseUser != null) {
+      return MyHomePage(title: 'Broaden');
+    }
+    return SignInPage();
   }
 }
