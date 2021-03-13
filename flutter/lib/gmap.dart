@@ -26,7 +26,7 @@ class _GMapState extends State<GMap> {
       Circle(
           circleId: CircleId("0"),
           center: LatLng(42.76493, 25.42432),
-          radius: 50000,
+          radius: 25000,
           strokeWidth: 2,
           fillColor: Color.fromRGBO(102, 51, 153, .5)),
     );
@@ -34,7 +34,7 @@ class _GMapState extends State<GMap> {
       Circle(
           circleId: CircleId("0"),
           center: LatLng(41.76493, 25.42432),
-          radius: 50000,
+          radius: 25000,
           strokeWidth: 2,
           fillColor: Color.fromRGBO(102, 51, 153, .5)),
     );
@@ -42,7 +42,7 @@ class _GMapState extends State<GMap> {
       Circle(
           circleId: CircleId("0"),
           center: LatLng(42.76493, 24.42432),
-          radius: 50000,
+          radius: 25000,
           strokeWidth: 2,
           fillColor: Color.fromRGBO(102, 51, 153, .5)),
     );
