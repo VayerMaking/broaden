@@ -1,4 +1,5 @@
 import 'package:broaden/camera_tab.dart';
+import 'package:broaden/leaderboard.dart';
 import 'package:broaden/profile_tab.dart';
 import 'package:broaden/sign_in_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -85,6 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(0.95),
       appBar: AppBar(
@@ -92,6 +95,32 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         elevation: 0,
         actions: <Widget>[
+          Container(
+            width: width - width / 6,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text.rich(
+                TextSpan(
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: '1100 ',
+                    ),
+                    WidgetSpan(
+                      child: FaIcon(
+                        FontAwesomeIcons.paw,
+                        size: 18.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           IconButton(
             icon: Icon(
               Icons.account_circle_rounded,
@@ -104,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             },
-          )
+          ),
         ],
       ),
       body: _children[_currentIndex],
@@ -121,15 +150,18 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _currentIndex,
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
+            icon: new Icon(
+              Icons.home,
+              color: Colors.black,
+            ),
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.camera_alt_outlined),
+            icon: new Icon(Icons.camera_alt_outlined, color: Colors.black),
             title: Text('Camera'),
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.dog),
+            icon: FaIcon(FontAwesomeIcons.dog, color: Colors.black),
             title: Text('Animals'),
           )
         ],

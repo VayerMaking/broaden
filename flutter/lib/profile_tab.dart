@@ -37,7 +37,7 @@ class _ProfileState extends State<Profile> {
                   clipper: GetClipper(),
                 ),
                 Positioned(
-                    width: 350.0,
+                    width: MediaQuery.of(context).size.width,
                     top: MediaQuery.of(context).size.height / 5,
                     child: Column(
                       children: <Widget>[
@@ -45,7 +45,7 @@ class _ProfileState extends State<Profile> {
                             width: 150.0,
                             height: 150.0,
                             decoration: BoxDecoration(
-                                color: Colors.red,
+                                color: Colors.white,
                                 image: DecorationImage(
                                     image: NetworkImage(
                                         'https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
