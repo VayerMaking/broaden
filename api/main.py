@@ -14,6 +14,7 @@ import werkzeug
 
 
 UPLOAD_FOLDER = 'uploads'
+APP_IMAGES_FOLDER = 'app_images'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
@@ -154,9 +155,11 @@ def set_user_id():
 @app.route('/leaderboard', methods = ['GET', 'POST'])
 def leaderboard():
     users = User.query.order_by(User.points.desc()).limit(10).all()
-
     return jsonify(users)
 
+@app.route('/app_image/<path:filename>')
+def send_app_image(filename):
+    return send_from_directory(APP_IMAGES_FOLDER, filename)
 
 def random_string(length):
     return ''.join(random.choice(string.ascii_letters) for x in range(length))
