@@ -28,37 +28,31 @@ upload(File imageFile) async {
   final User user = auth.currentUser;
 
   LocationData _locationData;
-  // open a bytestream
+
   var stream =
       new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
-  // get file length
+
   var length = await imageFile.length();
 
-  // string to uri
   var uri = Uri.parse("http://192.168.88.244:5000/upload");
 
-  // create multipart request
   var request = new http.MultipartRequest("POST", uri);
 
-  // multipart that takes file
   var multipartFile = new http.MultipartFile('image', stream, length,
       filename: basename(imageFile.path));
 
   _locationData = await location.getLocation();
-  // add file to multipart
   request.files.add(multipartFile);
   request.fields['user_id'] = user.uid;
   request.fields['user_email'] = user.email;
   request.fields['lat'] = _locationData.latitude.toString();
   request.fields['log'] = _locationData.longitude.toString();
-  // send
   var response = await request.send();
   print(response.statusCode);
   if (response.statusCode == 200) {
     PopUp();
   }
 
-  // listen for response
   response.stream.transform(utf8.decoder).listen((value) {
     print(value);
   });
