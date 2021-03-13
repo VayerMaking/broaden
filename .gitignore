@@ -4,3 +4,5 @@ config.py
 api/__pycache__/
 /__pycache__/
 api/uploads/*
+api/app_images/*
+utils/*/*.jpg
