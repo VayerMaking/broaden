@@ -12,9 +12,9 @@ import pickle
 
 DIR = "/home/petar/Documents/broaden/ml/Pictures/"
 
-CATEGORIES = ["Animals", "Others"]
+CATEGORIES = ["Mammals", "Arthropods", "Birds", "ReptilesAmphibians", "Fish", "Others"]
 
-IMAGE_SIZE = 40
+IMAGE_SIZE = 50
 
 training_data = []
 
@@ -23,19 +23,24 @@ X = []
 y = []
 # label is simple classification
 
+depth = 6 # end Layers count
+
 def get_training_data():
 	for category in CATEGORIES:
 		# Get categories path
 		path = os.path.join(DIR, category)
 		class_number = CATEGORIES.index(category)
+
+		layers = tf.one_hot(class_number, depth, on_value=None, off_value=None, axis=None, dtype=None, name=None)
+		print(f"Layers: {layers}\n NUmber: {class_number}\n")
+
 		# Get every image from curr dir
 		for image in os.listdir(path):
-			print(image)
 			try:
 				# Converting image to grayscale array
 				image_array = cv2.imread(os.path.join(path, image), cv2.IMREAD_GRAYSCALE)
 				new_array = cv2.resize(image_array, (IMAGE_SIZE, IMAGE_SIZE)) 
-				training_data.append([new_array, class_number])
+				training_data.append([new_array, layers])
 			except Exception as e:
 				print("Image convertion failed!")
 
@@ -72,28 +77,49 @@ infile.close()
 X=np.array(X/255.0)
 y=np.array(y)
 
-#Create model 
-model = Sequential()
-model.add(Conv2D(64, (3, 3), input_shape=X.shape[1:]))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+dense_layers = [0]
+layer_sizes = [64]
+conv_layers = [3]
 
-# Redoing Convolutional and MaxPooling for better accuracy
-model.add(Conv2D(64, (3, 3)))
-model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(2, 2)))
+for dense_layer in dense_layers:
+	for layer_size in layer_sizes:
+		for conv_layer in conv_layers:
+			current_name = "{}-conv-{}-nodes-{}-dense".format(conv_layer, layer_size, dense_layer)
+			print(current_name)
+			#Create model 
+			model = Sequential()
 
-model.add(Flatten())
-model.add(Dense(64))
-model.add(Activation('relu'))
+			model.add(Conv2D(layer_size, (3, 3), input_shape=X.shape[1:]))
+			model.add(Activation('relu'))
+			model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Dense(1))
-model.add(Activation('sigmoid'))
+			for l in range(conv_layer - 1):
+				# Redoing Convolutional and MaxPooling for better accuracy
+				model.add(Conv2D(layer_size, (3, 3)))
+				model.add(Activation('relu'))
+				model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.compile(loss="binary_crossentropy", optimizer="adam", metrics=['accuracy']) # For more than two outputs use: categorical_crossentropy
-print(type(y))
-model.fit(X, y, batch_size=40, validation_split=0.2, epochs=2)
+			model.add(Flatten())
+
+			for l in range(dense_layer):
+				model.add(Dense(layer_size), activation='relu')
+			'''model.add(Dense(64))
+			model.add(Activation('relu'))
+
+			model.add(Dense(64))
+			model.add(Activation('relu'))
 
 
-model.save('Animal-CNN.model')
+			model.add(Dense(64))
+			model.add(Activation('relu'))'''
 
+			model.add(Dense(6))
+			model.add(Activation('sigmoid'))
+			# For better accuracy I chould have more layers
+
+			model.compile(loss='categorical_crossentropy', optimizer="adam", metrics=['accuracy']) # For more than two outputs use: categorical_crossentropy 'mean_squared_error'
+
+			model.fit(X, y, batch_size=60, validation_split=0.2, epochs=10)
+
+
+			model.save('AnimalSpecies-CNN.model')
