@@ -99,7 +99,7 @@ def index():
 
 @app.route('/user/', methods = ['GET'])
 def user():
-    user = User.query.filter_by(id = request.args.get('user_id')).first()
+    user = User.query.filter_by(author_id = request.args.get('user_id')).all()
     return jsonify(user)
 
 @app.route('/news', methods = ['GET'])
@@ -141,7 +141,10 @@ def verify():
 @app.route('/verify/<path:filename>', methods = ['GET', 'POST'])
 def verify_upload(filename):
     upload = Upload.query.filter_by(filename = filename).first()
+    user = User.query.filter_by(author_id = upload.author_id).first()
+    user.points += 1
     upload.verified = True
+    db.session.add(user)
     db.session.add(upload)
     db.session.commit()
     return redirect('/verify')
@@ -154,7 +157,9 @@ def set_user_id():
 
 @app.route('/leaderboard', methods = ['GET', 'POST'])
 def leaderboard():
-    users = User.query.order_by(User.points.desc()).limit(10).all()
+    users = User.query.order_by(User.points.desc()).all()
+    #leaderboard_dict = dict(enumerate(users, start=1))
+    #print(leaderboard_dict)
     return jsonify(users)
 
 @app.route('/app_image/<path:filename>')
