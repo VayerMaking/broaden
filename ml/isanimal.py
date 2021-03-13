@@ -10,29 +10,28 @@ import matplotlib.pyplot as plt
 import random
 import pickle
 
-DIR = "/home/petar/Desktop/broaden/AnimalRecognition/Pictures/"
+DIR = "/home/petar/Documents/broaden/ml/Pictures"
 
-CATEGORIES = ["Animals", "Others"]
+CATEGORIES = ["Cats", "Dogs", "Others"]
+IMAGE_SIZE = 70
 
-IMAGE_SIZE = 40
-
-training_data = []
-
-X = []
-# feature set that help to predict the output variable.
-y = []
-# label is simple classification
-
-filepath = ''
 def prepare(filepath):
 	image_array = cv2.imread(filepath, cv2.IMREAD_GRAYSCALE)
 	new_array = cv2.resize(image_array, (IMAGE_SIZE, IMAGE_SIZE))
 	return new_array.reshape(-1, IMAGE_SIZE, IMAGE_SIZE, 1)
 
-model = tf.keras.models.load_model('Animal-CNN.model')
+model = tf.keras.models.load_model('AnimalSpecies-CNN.model')
+path = os.path.join(DIR, "CDTest")
+for image in os.listdir(path):
+	prediction = model.predict([prepare("Pictures/CDTest/" + image)])
+	print(image)
+	print(prediction)
+	#print(CATEGORIES[int(prediction[0][0])])
+	print()
 
-prediction = model.predict([prepare('Pictures/Animals/test1.jpg')])
 
-print(prediction)
+'''prediction = model.predict([prepare("Pictures/Test/at.jpeg")])
+print(prediction)'''
+
 
 
