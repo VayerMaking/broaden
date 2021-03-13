@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:async/async.dart';
+import 'package:broaden/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:location/location.dart';
 import 'package:path/path.dart';
 
 import 'package:http/http.dart' as http;
@@ -19,7 +22,12 @@ class PreviewScreen extends StatefulWidget {
   _PreviewScreenState createState() => _PreviewScreenState();
 }
 
-Upload(File imageFile) async {
+upload(File imageFile) async {
+  Location location = new Location();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final User user = auth.currentUser;
+
+  LocationData _locationData;
   // open a bytestream
   var stream =
       new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
@@ -27,7 +35,7 @@ Upload(File imageFile) async {
   var length = await imageFile.length();
 
   // string to uri
-  var uri = Uri.parse("http://192.168.88.246:5000/upload");
+  var uri = Uri.parse("http://192.168.88.244:5000/upload");
 
   // create multipart request
   var request = new http.MultipartRequest("POST", uri);
@@ -36,12 +44,19 @@ Upload(File imageFile) async {
   var multipartFile = new http.MultipartFile('image', stream, length,
       filename: basename(imageFile.path));
 
+  _locationData = await location.getLocation();
   // add file to multipart
   request.files.add(multipartFile);
-
+  request.fields['user_id'] = user.uid;
+  request.fields['user_email'] = user.email;
+  request.fields['lat'] = _locationData.latitude.toString();
+  request.fields['log'] = _locationData.longitude.toString();
   // send
   var response = await request.send();
   print(response.statusCode);
+  if (response.statusCode == 200) {
+    PopUp();
+  }
 
   // listen for response
   response.stream.transform(utf8.decoder).listen((value) {
@@ -80,7 +95,7 @@ class _PreviewScreenState extends State<PreviewScreen> {
                       color: Colors.white,
                     ),
                     onPressed: () {
-                      Upload(File(widget.imgPath));
+                      upload(File(widget.imgPath));
                       Navigator.pop(context);
                     },
                   ),
