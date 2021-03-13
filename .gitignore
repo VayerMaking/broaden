@@ -4,4 +4,6 @@ config.py
 api/__pycache__/
 /__pycache__/
 api/uploads/*
+!api/uploads/just_to_keep_project_structure.txt
 api/app_images/*
+!api/app_images/just_to_keep_project_structure.txt
