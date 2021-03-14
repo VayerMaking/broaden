@@ -1,7 +1,7 @@
-# broaden
-short version: An app for exploring animals and a grading system based on the extinction status of the animal
+# Broaden
+Приложение с цел да защити природата ни от застрояване. Играчите, които заснемат застрашени видове се изкачват в Leaderboard-a.🐥🐸
 
-long version:
+## За проекта
 
 ```
 Социална мрежа / приложение за надпревара на търсене на защитени видове животни, което
@@ -15,23 +15,29 @@ long version:
 интелект и биват потвърдени от специалист.
 
 ```
+## Визуализация
 
-## Project Structure
+![alt text](https://cdn.discordapp.com/attachments/688057188333125686/820481328042606652/Screenshot_2021-03-14-03-57-49-114_com.example.broaden.jpg)
+![alt text](https://cdn.discordapp.com/attachments/688057188333125686/820481327207284736/Screenshot_2021-03-14-03-57-07-654_com.example.broaden.jpg)
+![alt text](https://cdn.discordapp.com/attachments/688057188333125686/820481328532684831/Screenshot_2021-03-14-03-58-24-900_com.example.broaden.jpg)
+![alt text](https://cdn.discordapp.com/attachments/688057188333125686/820481327509536808/Screenshot_2021-03-14-03-57-14-742_com.example.broaden.jpg)
+
+## Структура на проекта
   * /api
-    * the api endpoints
+    * Used for API endpoints
   * /ml
-    * the machine learning algorythmes for classifying the uploaded images
+    * Machine learning algorythmes for classifying the uploaded images
   * /flutter
-    * the app
+    * Used for the front-end app
   * /utils
-    * useful scripts for collecting data for the ml
+    * Useful scripts for collecting data for the ml
   * /db
-    * database managment scripts and inserts
+    * Database managment scripts and inserts
 
-## Authors
+## Автори
 
-  Martin Vayer - [VayerMaking](https://github.com/VayerMaking)
+  Martin Vayer -> [VayerMaking](https://github.com/VayerMaking)
 
-  Peter Damianov - [petardmnv](https://github.com/petardmnv)
+  Peter Damianov -> [petardmnv](https://github.com/petardmnv)
 
-  Iskren Alexandrov - [Iskrata](https://github.com/Iskrata)
+  Iskren Alexandrov -> [Iskrata](https://github.com/Iskrata)
