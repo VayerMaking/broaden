@@ -21,19 +21,21 @@ def prepare(filepath):
 	new_array = cv2.resize(image_array, (IMAGE_SIZE, IMAGE_SIZE))
 	return new_array.reshape(-1, IMAGE_SIZE, IMAGE_SIZE, 1)
 
-def run():
+def run(filename):
+	print(filename)
 	model = tf.keras.models.load_model('Animal-CNN.model')
-	path = os.path.join(DIR, "uploads")
-	res = []
-	for image in os.listdir(path):
-		if image != 'just_to_keep_project_structure.txt':
-			prediction = model.predict([prepare("uploads/" + image)])
-			res.append({image : int(prediction[0][0])})
-			print(image)
-			print(prediction)
+	#path = os.path.join(DIR, "uploads")
+	#res = []
+	#for image in os.listdir(path):
+	#	if image != 'just_to_keep_project_structure.txt':
+	prediction = model.predict([prepare("uploads/" + filename)])
+	#		res.append({image : int(prediction[0][0])})
+	#		print(image)
+	#		print(prediction)
 			#print(CATEGORIES[int(prediction[0][0])])
-			print()
-	return res
+	#		print()
+	#return res
+	return int(prediction[0][0])
 
 '''prediction = model.predict([prepare("Pictures/Test/at.jpeg")])
 print(prediction)'''
