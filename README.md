@@ -15,13 +15,6 @@
 интелект и биват потвърдени от специалист.
 
 ```
-## Визуализация
-
-<img src="https://i.imgur.com/tOAyPXj.jpg " w height="300">
-<img src="https://i.imgur.com/8iuTttN.jpg " w height="300">
-<img src="https://i.imgur.com/gRWe94K.jpg " w height="300">
-<img src="https://i.imgur.com/8qg7B3g.jpg " w height="300">
-<img src="https://i.imgur.com/kdft4Ew.jpg " w height="300">
 
 
 ## Структура на проекта
@@ -35,6 +28,13 @@
     * Useful scripts for collecting data for the ml
   * /db
     * Database managment scripts and inserts
+
+## Визуализация
+
+<img src="https://i.imgur.com/tOAyPXj.jpg " w height="300">
+<img src="https://i.imgur.com/8iuTttN.jpg " w height="300">
+<img src="https://i.imgur.com/gRWe94K.jpg " w height="300">
+<img src="https://i.imgur.com/8qg7B3g.jpg " w height="300">
 
 ## Автори
 
