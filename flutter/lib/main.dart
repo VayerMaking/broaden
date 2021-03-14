@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.lightBlue[800],
           accentColor: Colors.cyan[600],
+          fontFamily: "ProximaNova",
         ),
         home: AuthenticationWrapper(),
       ),
@@ -107,11 +108,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   children: [
                     TextSpan(
-                      text: '1100 ',
+                      text: 'Broaden ',
                     ),
                     WidgetSpan(
                       child: FaIcon(
-                        FontAwesomeIcons.paw,
+                        FontAwesomeIcons.binoculars,
                         size: 18.0,
                         color: Colors.white,
                       ),

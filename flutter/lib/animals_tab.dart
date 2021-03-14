@@ -1,44 +1,113 @@
 import 'package:flutter/material.dart';
 
-Widget _buildAnimal(index) {
+var names = [
+  "Скален орел",
+  "Червен ангъч",
+  "Ловен соколо",
+  "Ливаден дървадец",
+  "Белогръб кълвач",
+  "Египетски лешояд",
+  "Гълъб хралупар",
+  "Белошипа ветрушка",
+  "Сокол орко",
+  "Малък креслив орел",
+  "Черен щъркел",
+  "Осояд",
+  "Голям ястреб",
+  "Орел змияр",
+  "Черен кълвач",
+];
+var names_latino = [
+  "(Aquila chrysaetos)",
+  "(Tadorna)",
+  "(Falco cherrug)",
+  "(Crex crex)",
+  "(Dendrocopos leucotos)",
+  "(Dendrocopos leucotos)",
+  "(Neophron percnopterus)",
+  "(Columba oenas)",
+  "(Falco naumanni)",
+  "(Falco subbuteo)",
+  "(Clanga pomarina)",
+  "(Ciconia nigra)",
+  "(Pernis apivorus)",
+  "(Accipiter gentilis)",
+  "(Circaetus gallicus)",
+  "(Dryocopus martius)",
+];
+var names_v = [
+  "Алпийски тритон",
+  "Сирийска чесновица",
+  "Вдълбнаточел смок",
+  "Смок мишкар",
+  "Змиегущер",
+  "Леопардов смок",
+  "Шипоопашата кост.",
+  "Шипобедрена кост.",
+];
+var names_v_latino = [
+  "(Ichthyosaura alpestris)",
+  "(Pelobates syriacus)",
+  "(Malpolon monspessulanus)",
+  "(Zamenis longissimus)",
+  "(Pseudopus apodus)",
+  "(Zamenis situla)",
+  "(Testudo hermanni)",
+  "(Testudo graeca)",
+];
+
+Widget _buildAnimal(index, type, list, list_lat) {
   return Padding(
     //padding: const EdgeInsets.all(8.0),
     padding: EdgeInsets.fromLTRB(4, 8, 4, 8),
     child: Container(
       height: 85,
       decoration: BoxDecoration(
-        color: Colors.blue[300],
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
+        boxShadow: [
+          BoxShadow(blurRadius: 2.0, color: Colors.black),
+        ],
       ),
       child: Padding(
         padding: EdgeInsets.all(10),
         child: Align(
           alignment: Alignment.topLeft,
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Stack(
-                children: [
-                  Image.asset(
-                    'assets/p-01.jpg',
-                    // width: 600.0,
-                    // height: 240.0,
-                    fit: BoxFit.cover,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 70, 0),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: Text(
-                        "Черен Щъркел",
+          child: Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  "http://192.168.88.244:5000/app_image/$type$index.jpg",
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Column(
+                    children: [
+                      Text(
+                        list[index],
                         style: TextStyle(
-                            color: Colors.white,
-                            //fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
                       ),
-                    ),
-                  )
-                ],
-              )),
+                      Text(
+                        list_lat[index],
+                        style: TextStyle(
+                            color: Colors.black,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: 15),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     ),
@@ -54,7 +123,7 @@ class Animals extends StatelessWidget {
           alignment: Alignment.topLeft,
           child: Padding(
             //padding: EdgeInsets.all(16),
-            padding: const EdgeInsets.fromLTRB(8, 16, 8, 16),
+            padding: const EdgeInsets.fromLTRB(15, 16, 8, 16),
             child: SafeArea(
               child: ListView(
                 //crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +135,7 @@ class Animals extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: 30),
+                          fontSize: 25),
                     ),
                   ),
                   Container(
@@ -81,20 +150,36 @@ class Animals extends StatelessWidget {
                           color: Colors.grey,
                           fontFamily: 'SFNSText',
                           //fontWeight: FontWeight.bold,
-                          fontSize: 20),
+                          fontSize: 25),
                     ),
                   ),
-
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: 10,
+                    itemCount: 15,
                     itemBuilder: (context, index) {
-                      return _buildAnimal(index);
+                      return _buildAnimal(index, "pt", names, names_latino);
                     },
                   ),
-
-                  //_buildAnimal(0),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 30),
+                    child: Text(
+                      "Земноводни и влечуги",
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontFamily: 'SFNSText',
+                          //fontWeight: FontWeight.bold,
+                          fontSize: 25),
+                    ),
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 8,
+                    itemBuilder: (context, index) {
+                      return _buildAnimal(index, "v", names_v, names_v_latino);
+                    },
+                  ),
                 ],
               ),
             ),

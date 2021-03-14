@@ -33,7 +33,7 @@ class _GMapState extends State<GMap> {
     _circles.add(
       Circle(
           circleId: CircleId("0"),
-          center: LatLng(41.76493, 25.42432),
+          center: LatLng(43.046551, 25.617478),
           radius: 25000,
           strokeWidth: 2,
           fillColor: Color.fromRGBO(102, 51, 153, .5)),
@@ -41,7 +41,47 @@ class _GMapState extends State<GMap> {
     _circles.add(
       Circle(
           circleId: CircleId("0"),
-          center: LatLng(42.76493, 24.42432),
+          center: LatLng(43.176379, 27.125564),
+          radius: 25000,
+          strokeWidth: 2,
+          fillColor: Color.fromRGBO(102, 51, 153, .5)),
+    );
+    _circles.add(
+      Circle(
+          circleId: CircleId("0"),
+          center: LatLng(43.548744, 23.334008),
+          radius: 25000,
+          strokeWidth: 2,
+          fillColor: Color.fromRGBO(102, 51, 153, .5)),
+    );
+    _circles.add(
+      Circle(
+          circleId: CircleId("0"),
+          center: LatLng(41.727465, 23.806870),
+          radius: 25000,
+          strokeWidth: 2,
+          fillColor: Color.fromRGBO(102, 51, 153, .5)),
+    );
+    _circles.add(
+      Circle(
+          circleId: CircleId("0"),
+          center: LatLng(42.666365, 25.155147),
+          radius: 25000,
+          strokeWidth: 2,
+          fillColor: Color.fromRGBO(102, 51, 153, .5)),
+    );
+    _circles.add(
+      Circle(
+          circleId: CircleId("0"),
+          center: LatLng(43.192864, 23.914733),
+          radius: 25000,
+          strokeWidth: 2,
+          fillColor: Color.fromRGBO(102, 51, 153, .5)),
+    );
+    _circles.add(
+      Circle(
+          circleId: CircleId("0"),
+          center: LatLng(41.961827, 25.155147),
           radius: 25000,
           strokeWidth: 2,
           fillColor: Color.fromRGBO(102, 51, 153, .5)),

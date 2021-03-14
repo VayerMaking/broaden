@@ -2,7 +2,7 @@
     package="com.example.broaden">
    <application
         android:label="broaden"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         android:usesCleartextTraffic="true"
         >
         
