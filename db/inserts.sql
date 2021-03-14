@@ -230,10 +230,21 @@ INSERT INTO Map (x,y,count) VALUES (20,8,5);
 INSERT INTO Map (x,y,count) VALUES (20,9,5);
 INSERT INTO Map (x,y,count) VALUES (20,10,5);
 
-INSERT INTO User (user_id, username, points) VALUES ("123", "mvayer", 100000);
-
 INSERT INTO News (title, text, image, timestamp) VALUES ("Does nature afect our vision", "pcheli ubitzi napoadnaha sofiq i prevzeha stolicata", "HPTgRzBpodSencteoIMdqbROirIGaIRJxclZLEfWZzbuwPmBFOaVgZAJIMyLiaCr.png",'2021-01-28 13:40:42');
 INSERT INTO News (title, text, image, timestamp) VALUES ("Does 5g hurt pigeons", "slabo rabota", "kMRRwHFNiDaZobJEhaPvLbVqkSnonuITJQNdWyowUcxAqgIpkqYAAlAUPMHDYzvv.jpeg", '2021-01-28 13:40:42');
 INSERT INTO News (title, text, image, timestamp) VALUES ("Butterflies and their lifestyle", "te sa se izmuknali ot zooparka", "MEzkdDjbJRposUjQjmnsrmoXlkvJKZyILbzxCTkMwCpeZfazFgxzBODWJPJArCvN.jpeg", '2021-01-28 13:40:42');
 INSERT INTO News (title, text, image, timestamp) VALUES ("What animal is baby yoda", "asdf", "tJrSscgRXuGplLWJcDuuQZxGmmRTFnlJylYSqPuLUvHdrXFKdpwLhJhAEeXHWWVv.jpeg", '2021-01-28 13:40:42');
 INSERT INTO News (title, text, image, timestamp) VALUES ("Is Linux an animal", "qwerty", "ylgkeqcPBmFuBLJmhXQvOWMFyolPZvSUcfJRCBTjvZpwUTIiCqZpYXaGktYbCxre.png", '2021-01-28 13:40:42');
+
+INSERT INTO User (author_id, author_email, points, name) VALUES ("WIaqpuwKkkXVUYWQ4ltK7Q6X5By1", "martin.vayer@gmail.com", 333, "Martin Vayer");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("eKLThbdL82PwHGufJsr8qvzKXsA2", "admin@gmail.com", 420, "Isker Aleksandrov");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aa", "aa@gmail.com", 69, "Iskren Aleksandrov");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaa", "aaa@gmail.com", 23, "Petur Beron");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaaa", "aaaa@gmail.com", 32, "Pesho Slepiq");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaaaa", "aaaaa@gmail.com", 13, "Ivan Ivanov");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaaaaa", "aaaaa@gmail.com", 11, "Abdir Rasat");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaaaaaa", "aaaaaa@gmail.com", 1, "Hadir Abdul");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaaaaaaa", "aaaaaa@gmail.com", 0, "Rajesh Ashlandi");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaaaaaaaa", "aaaaaaa@gmail.com", 7, "Diablo Petrocini");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaaaaaaaaa", "aaaaaaa@gmail.com", 8, "Ricardo Luciano");
+INSERT INTO User (author_id, author_email, points, name) VALUES ("aaaaaaaaaaa", "aaaaaaaaa@gmail.com", 99, "James Hoferman");
