@@ -17,10 +17,12 @@
 ```
 ## Визуализация
 
-![alt text](https://cdn.discordapp.com/attachments/688057188333125686/820481328042606652/Screenshot_2021-03-14-03-57-49-114_com.example.broaden.jpg)
-![alt text](https://cdn.discordapp.com/attachments/688057188333125686/820481327207284736/Screenshot_2021-03-14-03-57-07-654_com.example.broaden.jpg)
-![alt text](https://cdn.discordapp.com/attachments/688057188333125686/820481328532684831/Screenshot_2021-03-14-03-58-24-900_com.example.broaden.jpg)
-![alt text](https://cdn.discordapp.com/attachments/688057188333125686/820481327509536808/Screenshot_2021-03-14-03-57-14-742_com.example.broaden.jpg)
+<img src="https://cdn.discordapp.com/attachments/688057188333125686/820481328042606652/Screenshot_2021-03-14-03-57-49-114_com.example.broaden.jpg " w height="300">
+<img src="https://cdn.discordapp.com/attachments/688057188333125686/820481327207284736/Screenshot_2021-03-14-03-57-07-654_com.example.broaden.jpg " w height="300">
+<img src="https://cdn.discordapp.com/attachments/688057188333125686/820481328532684831/Screenshot_2021-03-14-03-58-24-900_com.example.broaden.jpg " w height="300">
+<img src="https://cdn.discordapp.com/attachments/688057188333125686/820481327509536808/Screenshot_2021-03-14-03-57-14-742_com.example.broaden.jpg " w height="300">
+<img src="https://cdn.discordapp.com/attachments/688057188333125686/820481328294002698/Screenshot_2021-03-14-03-58-16-023_com.example.broaden.jpg " w height="300">
+
 
 ## Структура на проекта
   * /api
