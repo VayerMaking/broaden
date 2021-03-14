@@ -111,6 +111,10 @@ def news():
 def send_file(filename):
     return send_from_directory(APP_IMAGES_FOLDER, filename)
 
+@app.route('/verify_img/<path:filename>')
+def verify_img_send_file(filename):
+    return send_from_directory(UPLOAD_FOLDER, filename)
+
 @app.route('/upload', methods = ['GET', 'POST'])
 def upload():
     imagefile = request.files['image']
