@@ -12,6 +12,7 @@ import os
 from dataclasses import dataclass
 import werkzeug
 
+import isanimal
 
 UPLOAD_FOLDER = 'uploads'
 APP_IMAGES_FOLDER = 'app_images'
@@ -42,9 +43,6 @@ class User(db.Model):
     author_id = db.Column(db.String(50))
     author_email = db.Column(db.String(50))
     name = db.Column(db.String(20))
-
-
-
 
 @dataclass
 class Map(db.Model):
@@ -165,6 +163,11 @@ def leaderboard():
 @app.route('/app_image/<path:filename>')
 def send_app_image(filename):
     return send_from_directory(APP_IMAGES_FOLDER, filename)
+
+@app.route('/classify', methods = ['GET'])
+def classify():
+    res = isanimal.run()
+    return jsonify(res)
 
 def random_string(length):
     return ''.join(random.choice(string.ascii_letters) for x in range(length))
