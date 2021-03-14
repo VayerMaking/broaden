@@ -6,7 +6,11 @@ import 'package:http/http.dart' as http;
 
 import 'article_screen.dart';
 
-// TODO: Change font
+import 'services/authentication_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final FirebaseAuth auth = FirebaseAuth.instance;
+final User user = auth.currentUser;
 
 class Home extends StatefulWidget {
   @override

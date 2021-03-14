@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import 'services/authentication_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final FirebaseAuth auth = FirebaseAuth.instance;
+final User user = auth.currentUser;
+
 class LeaderBoard extends StatefulWidget {
   @override
   _LeaderBoardState createState() => _LeaderBoardState();
@@ -9,13 +15,17 @@ class LeaderBoard extends StatefulWidget {
 
 class _LeaderBoardState extends State<LeaderBoard> {
   final String url = "http://192.168.88.244:5000/leaderboard";
+  final String user_url =
+      "http://192.168.88.244:5000/user/?user_id=${user.uid}";
   List data;
+  List user_data;
+  var pos = 0;
 
   @override
   void initState() {
     super.initState();
-
     getJSONData();
+    getJSONData2();
   }
 
   Future<String> getJSONData() async {
@@ -32,8 +42,33 @@ class _LeaderBoardState extends State<LeaderBoard> {
     return "Success";
   }
 
+  Future<String> getJSONData2() async {
+    var response = await http
+        .get(Uri.encodeFull(user_url), headers: {"Accept": "application/json"});
+    print(response.body);
+    debugPrint(response.body);
+
+    var pos_i;
+    if (data != null) {
+      for (var i = 0; i < data.length; i++) {
+        if (data[i]["author_id"] == user.uid) {
+          pos_i = i;
+        }
+      }
+    }
+
+    setState(() {
+      var convertDataToJson = json.decode(response.body);
+      user_data = convertDataToJson;
+      pos = pos_i;
+    });
+
+    return "Success";
+  }
+
   _buildBody() {
     double width = MediaQuery.of(context).size.width;
+    pos == null ? pos = 0 : 0;
     return ListView(
       children: [
         Container(
@@ -90,7 +125,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: '2',
+                            text: (pos + 1).toString(),
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           TextSpan(text: 'nd'),
@@ -111,7 +146,7 @@ class _LeaderBoardState extends State<LeaderBoard> {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            text: '1100',
+                            text: user_data[0]["points"].toString(),
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           TextSpan(text: 'pts'),
