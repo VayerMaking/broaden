@@ -11,7 +11,7 @@ import string
 import os
 from dataclasses import dataclass
 import werkzeug
-
+import requests
 import isanimal
 
 UPLOAD_FOLDER = 'uploads'
@@ -49,7 +49,7 @@ class Map(db.Model):
     id: int
     x: int
     y: int
-    count: int          #count of animals in the area(for Nikolcho)
+    count: int
 
     id = db.Column(db.Integer, primary_key = True)
     x = db.Column(db.Integer)
@@ -80,6 +80,7 @@ class Upload(db.Model):
     verified: bool
     author_email: str
     author_id: str
+    classified_as: str
 
     id = db.Column(db.Integer, primary_key = True)
     filename = db.Column(db.String(64))
@@ -89,6 +90,7 @@ class Upload(db.Model):
     verified = db.Column(db.Boolean, default = False)
     author_email = db.Column(db.String(50))
     author_id = db.Column(db.String(30))
+    classified_as = db.Column(db.String(40))
 
 @app.route('/', methods = ['GET'])
 def index():
@@ -107,12 +109,15 @@ def news():
 
 @app.route('/img/<path:filename>')
 def send_file(filename):
+    return send_from_directory(APP_IMAGES_FOLDER, filename)
+
+@app.route('/verify_img/<path:filename>')
+def verify_img_send_file(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
 
 @app.route('/upload', methods = ['GET', 'POST'])
 def upload():
     imagefile = request.files['image']
-    #location = request.args.get('location')
     lat  = request.form.get('lat')
     log  = request.form.get('log')
     author_email  = request.form.get('user_email')
@@ -128,6 +133,8 @@ def upload():
 
     db.session.add(upload)
     db.session.commit()
+
+    redirection(new_filename)
 
     return "Image Uploaded Successfully"
 
@@ -156,18 +163,32 @@ def set_user_id():
 @app.route('/leaderboard', methods = ['GET', 'POST'])
 def leaderboard():
     users = User.query.order_by(User.points.desc()).all()
-    #leaderboard_dict = dict(enumerate(users, start=1))
-    #print(leaderboard_dict)
+
     return jsonify(users)
 
 @app.route('/app_image/<path:filename>')
 def send_app_image(filename):
     return send_from_directory(APP_IMAGES_FOLDER, filename)
 
-@app.route('/classify', methods = ['GET'])
-def classify():
-    res = isanimal.run()
-    return jsonify(res)
+@app.route('/classify/<path:filename>', methods = ['GET'])
+def classify(filename):
+    res = isanimal.run(filename)
+    upload = Upload.query.filter_by(filename = filename).first()
+    if res == 1:
+        upload.classified_as = "Others"
+    elif res == 0:
+        upload.classified_as = "Animals"
+
+    db.session.add(upload)
+    db.session.commit()
+
+    return "success"
+
+def redirection(new_filename):
+    redirect_to = "http://0.0.0.0:5000/classify/" + new_filename
+    #print(redirect_to)
+    requests.get(redirect_to)
+    #return redirect(redirect_to)
 
 def random_string(length):
     return ''.join(random.choice(string.ascii_letters) for x in range(length))

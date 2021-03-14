@@ -11,7 +11,8 @@
 <body>
   {% for upload in uploads %}
 		<a role="button" href="{{url_for('verify_upload', filename=upload.filename)}}">Verify upload</a>
-		<img src=" {{url_for('send_file', filename=upload.filename)}}">
+		<img src=" {{url_for('verify_img_send_file', filename=upload.filename)}}">
+		<h4>classified_as: {{upload.classified_as}}</h4>
 	  <h4>{{upload.timestamp}}</h4>
     <h4>{{upload.lat}} , {{upload.log}}</h4>
 	{% endfor %}
